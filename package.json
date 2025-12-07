@@ -1,0 +1,68 @@
+{
+	"name": "anime",
+	"publisher": "HakuTheWolfSpirit",
+	"repository": {
+		"url": "https://github.com/HakuTheWolfSpirit/anime"
+	},
+	"displayName": "Anime",
+	"description": "Anime Metadata Domain-Specific Language support for VS Code",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.106.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"activationEvents": [
+		"onLanguage:anime"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "anime",
+				"aliases": [
+					"Anime",
+					"Anime Metadata DSL",
+					"amdsl"
+				],
+				"extensions": [
+					".anime"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "anime",
+				"scopeName": "source.anime",
+				"path": "./syntaxes/anime.tmLanguage.json"
+			}
+		],
+		"configurationDefaults": {
+			"[anime]": {
+				"editor.quickSuggestions": {
+					"other": true,
+					"comments": false,
+					"strings": false
+				},
+				"editor.suggest.insertMode": "replace",
+				"editor.autoClosingBrackets": "always"
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"lint": "eslint src --ext ts"
+	},
+	"devDependencies": {
+		"@types/node": "24.10.1",
+		"@types/vscode": "1.106.1",
+		"@typescript-eslint/eslint-plugin": "8.48.1",
+		"@typescript-eslint/parser": "8.48.1",
+		"eslint": "9.39.1",
+		"typescript": "5.9.3"
+	}
+}

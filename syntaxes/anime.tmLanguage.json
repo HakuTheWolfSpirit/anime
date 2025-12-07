@@ -1,0 +1,197 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "anime",
+	"scopeName": "source.anime",
+	"patterns": [
+		{ "include": "#comments" },
+		{ "include": "#version-declaration" },
+		{ "include": "#anime-resource" }
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.hash.anime",
+					"match": "#.*$"
+				},
+				{
+					"name": "comment.line.double-slash.anime",
+					"match": "//.*$"
+				},
+				{
+					"name": "comment.block.anime",
+					"begin": "/\\*",
+					"end": "\\*/",
+					"name": "comment.block.anime"
+				}
+			]
+		},
+		"version-declaration": {
+			"match": "(@version)\\s*(\"[^\"]*\")",
+			"captures": {
+				"1": { "name": "keyword.control.version.anime" },
+				"2": { "name": "string.quoted.double.anime" }
+			}
+		},
+		"anime-resource": {
+			"begin": "\\b(anime)\\s*(\"[^\"]*\")\\s*(\\{)",
+			"beginCaptures": {
+				"1": { "name": "keyword.declaration.anime.anime" },
+				"2": { "name": "entity.name.type.anime" },
+				"3": { "name": "punctuation.definition.block.begin.anime" }
+			},
+			"end": "(\\})",
+			"endCaptures": {
+				"1": { "name": "punctuation.definition.block.end.anime" }
+			},
+			"patterns": [
+				{ "include": "#block-contents" }
+			]
+		},
+		"nested-resources": {
+			"begin": "\\b(season|episode|movie|special|character|voice_actor)\\s*(\"[^\"]*\")\\s*(\\{)",
+			"beginCaptures": {
+				"1": { "name": "keyword.declaration.resource.anime" },
+				"2": { "name": "entity.name.type.anime" },
+				"3": { "name": "punctuation.definition.block.begin.anime" }
+			},
+			"end": "(\\})",
+			"endCaptures": {
+				"1": { "name": "punctuation.definition.block.end.anime" }
+			},
+			"patterns": [
+				{ "include": "#block-contents" }
+			]
+		},
+		"property-groups": {
+			"begin": "\\b(localized_titles|streaming_titles|public_opinion)\\s*(\\{)",
+			"beginCaptures": {
+				"1": { "name": "entity.name.section.anime" },
+				"2": { "name": "punctuation.definition.block.begin.anime" }
+			},
+			"end": "(\\})",
+			"endCaptures": {
+				"1": { "name": "punctuation.definition.block.end.anime" }
+			},
+			"patterns": [
+				{ "include": "#comments" },
+				{ "include": "#simple-property" }
+			]
+		},
+		"extension-groups": {
+			"begin": "(x-[a-zA-Z][a-zA-Z0-9_-]*)\\s*(\\{)",
+			"beginCaptures": {
+				"1": { "name": "entity.name.section.extension.anime" },
+				"2": { "name": "punctuation.definition.block.begin.anime" }
+			},
+			"end": "(\\})",
+			"endCaptures": {
+				"1": { "name": "punctuation.definition.block.end.anime" }
+			},
+			"patterns": [
+				{ "include": "#comments" },
+				{ "include": "#property-groups" },
+				{ "include": "#simple-property" }
+			]
+		},
+		"block-contents": {
+			"patterns": [
+				{ "include": "#comments" },
+				{ "include": "#nested-resources" },
+				{ "include": "#property-groups" },
+				{ "include": "#extension-groups" },
+				{ "include": "#array-property" },
+				{ "include": "#simple-property" }
+			]
+		},
+		"simple-property": {
+			"begin": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(=)\\s*",
+			"beginCaptures": {
+				"1": { "name": "variable.other.property.anime" },
+				"2": { "name": "keyword.operator.assignment.anime" }
+			},
+			"end": "(?=\\n|#|//|/\\*|\\})",
+			"patterns": [
+				{ "include": "#property-value" }
+			]
+		},
+		"array-property": {
+			"begin": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(=)\\s*(\\[)",
+			"beginCaptures": {
+				"1": { "name": "variable.other.property.anime" },
+				"2": { "name": "keyword.operator.assignment.anime" },
+				"3": { "name": "punctuation.definition.array.begin.anime" }
+			},
+			"end": "(\\])",
+			"endCaptures": {
+				"1": { "name": "punctuation.definition.array.end.anime" }
+			},
+			"patterns": [
+				{ "include": "#comments" },
+				{ "include": "#property-value" },
+				{
+					"name": "punctuation.separator.comma.anime",
+					"match": ","
+				}
+			]
+		},
+		"property-value": {
+			"patterns": [
+				{ "include": "#date-literal" },
+				{ "include": "#heredoc" },
+				{ "include": "#strings" },
+				{ "include": "#numbers" },
+				{ "include": "#booleans" }
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.anime",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.anime",
+					"match": "\\\\(?:[\"\\\\/ntr]|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})"
+				}
+			]
+		},
+		"heredoc": {
+			"name": "string.unquoted.heredoc.anime",
+			"begin": "(<<<)([A-Za-z][A-Za-z0-9_]*)\\s*$",
+			"beginCaptures": {
+				"1": { "name": "punctuation.definition.string.begin.anime" },
+				"2": { "name": "entity.name.tag.heredoc.anime" }
+			},
+			"end": "^(\\2)\\s*$",
+			"endCaptures": {
+				"1": { "name": "entity.name.tag.heredoc.anime" }
+			},
+			"contentName": "string.unquoted.heredoc.content.anime"
+		},
+		"date-literal": {
+			"match": "\\b(date)\\s*(\\()\\s*(\"[^\"]*\")\\s*(\\))",
+			"captures": {
+				"1": { "name": "support.function.date.anime" },
+				"2": { "name": "punctuation.definition.arguments.begin.anime" },
+				"3": { "name": "string.quoted.double.anime" },
+				"4": { "name": "punctuation.definition.arguments.end.anime" }
+			}
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.float.anime",
+					"match": "-?[0-9]+\\.[0-9]+"
+				},
+				{
+					"name": "constant.numeric.integer.anime",
+					"match": "-?[0-9]+"
+				}
+			]
+		},
+		"booleans": {
+			"name": "constant.language.boolean.anime",
+			"match": "\\b(true|false)\\b"
+		}
+	}
+}
