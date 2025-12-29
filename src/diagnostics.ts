@@ -21,10 +21,10 @@ const ANIME_PROPERTIES = [
 	'related', 'first_aired', 'last_aired'
 ];
 
-const SEASON_PROPERTIES = ['first_aired', 'last_aired'];
-const EPISODE_PROPERTIES = ['filler', 'length', 'air_date', 'synopsis'];
-const MOVIE_PROPERTIES = ['filler', 'length', 'release_date', 'description'];
-const SPECIAL_PROPERTIES = ['filler', 'length', 'air_date', 'description'];
+const SEASON_PROPERTIES = ['original_title', 'first_aired', 'last_aired'];
+const EPISODE_PROPERTIES = ['original_title', 'filler', 'length', 'air_date', 'synopsis'];
+const MOVIE_PROPERTIES = ['original_title', 'filler', 'length', 'release_date', 'description'];
+const SPECIAL_PROPERTIES = ['original_title', 'filler', 'length', 'air_date', 'description'];
 const CHARACTER_PROPERTIES = ['name'];
 const VOICE_ACTOR_PROPERTIES = ['name', 'language'];
 

@@ -43,11 +43,13 @@ const ANIME_PROPERTIES = [
 ];
 
 const SEASON_PROPERTIES = [
+	{ label: 'original_title', detail: 'Original title (string)', insertText: 'original_title = "$0"' },
 	{ label: 'first_aired', detail: 'Season premiere date', insertText: 'first_aired = date("$0")' },
 	{ label: 'last_aired', detail: 'Season finale date', insertText: 'last_aired = date("$0")' }
 ];
 
 const EPISODE_PROPERTIES = [
+	{ label: 'original_title', detail: 'Original title (string)', insertText: 'original_title = "$0"' },
 	{ label: 'filler', detail: 'Is filler episode (boolean)', insertText: 'filler = $0' },
 	{ label: 'length', detail: 'Duration in minutes (number)', insertText: 'length = $0' },
 	{ label: 'air_date', detail: 'Original air date', insertText: 'air_date = date("$0")' },
@@ -55,6 +57,7 @@ const EPISODE_PROPERTIES = [
 ];
 
 const MOVIE_PROPERTIES = [
+	{ label: 'original_title', detail: 'Original title (string)', insertText: 'original_title = "$0"' },
 	{ label: 'filler', detail: 'Is non-canon (boolean)', insertText: 'filler = $0' },
 	{ label: 'length', detail: 'Duration in minutes (number)', insertText: 'length = $0' },
 	{ label: 'release_date', detail: 'Theatrical release date', insertText: 'release_date = date("$0")' },
@@ -62,6 +65,7 @@ const MOVIE_PROPERTIES = [
 ];
 
 const SPECIAL_PROPERTIES = [
+	{ label: 'original_title', detail: 'Original title (string)', insertText: 'original_title = "$0"' },
 	{ label: 'filler', detail: 'Is non-canon (boolean)', insertText: 'filler = $0' },
 	{ label: 'length', detail: 'Duration in minutes (number)', insertText: 'length = $0' },
 	{ label: 'air_date', detail: 'Air date', insertText: 'air_date = date("$0")' },
